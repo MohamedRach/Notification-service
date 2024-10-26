@@ -1,46 +1,44 @@
-## Notification Service API
+# Notification Service API
 
-The Notification Service API is a microservice designed to send scheduled and instant notifications via email and SMS. It leverages AWS services like EventBridge, SNS, SQS, and Lambda to handle notifications efficiently.
+The **Notification Service API** is a scalable notification system that allows users to send scheduled and instant notifications via SMS and email. It’s built using **Spring Boot** and leverages AWS services for message queuing, scheduling, and processing.
 
-### Architecture Overview
+## Architecture
 
-The architecture is built on AWS Cloud infrastructure and includes the following components:
+The architecture leverages several AWS services to handle different aspects of the notification workflow.
 
-    - Notification API: Built with Spring Boot, this API acts as the entry point for creating and managing notifications.
-    - Amazon EventBridge: Used for scheduling notifications.
-    - Amazon SNS (Simple Notification Service): Handles the distribution of instant notifications.
-    - SQS Queues (Email Queue & SMS Queue): Queues for managing and processing email and SMS notifications asynchronously.
-    - AWS Lambda Processors:
-        - Email Processor: Retrieves messages from the Email Queue and sends them using Amazon SES.
-        - SMS Processor: Retrieves messages from the SMS Queue and sends them using AWS SMS services.
+- **Notification API**: Built with Spring Boot, acts as the main entry point for notification requests.
+- **Amazon EventBridge**: Manages scheduled notifications, sending them to the appropriate queue at the designated times.
+- **Amazon SNS**: Handles instant notifications by forwarding them to the appropriate messaging queue.
+- **Amazon SQS**: Stores notifications temporarily in **Email Queue** and **SMS Queue**.
+- **AWS Lambda**: Processes queued messages and sends them via email or SMS.
+  - **Email Processor**: Uses Amazon SES to send emails.
+  - **SMS Processor**: Uses AWS SNS for SMS delivery.
 
-### Architecture Diagram
+## Architecture Diagram
 
-Below is the architecture diagram illustrating the flow of notifications through the system:
-![architecture](images/architecture.png)
+![Architecture Diagram](images/architecture.png)
 
-### Features
+The above diagram illustrates the flow of notifications through the system, from the API to the end-user delivery.
 
-    - Instant Notifications: Allows real-time notifications through SMS or email.
-    - Scheduled Notifications: Uses AWS EventBridge to send notifications at specified times.
-    - Email and SMS Processing: Utilizes Lambda functions to process and send queued notifications, enabling asynchronous handling and reliability.
-    - AWS Integration: Efficient handling of notifications using managed AWS services for scalability and resilience.
+## Features
 
-### Technologies
+- **Scheduled Notifications**: Set up notifications to be sent at specific times.
+- **Instant Notifications**: Send notifications immediately to selected users.
+- **Multiple Channels**: Supports SMS and email notifications.
+- **AWS-Managed Infrastructure**: Utilizes AWS services for scalable and reliable message processing.
 
-    - Java & Spring Boot: REST API development.
-    - AWS: SNS, SQS, EventBridge, Lambda, SES, SMS.
-    - Queue-Based Processing: Asynchronous processing using SQS queues and Lambda functions.
+## Technologies
 
-### Setup and Installation
+- **Backend**: Spring Boot, AWS SDK
+- **AWS Services**: SNS, SQS, EventBridge, Lambda, SES
 
-#### Prerequisites
+## Setup and Installation
 
-    - Java 17+
-    - Maven or Gradle (for building the project)
-    - AWS account with permissions to use SNS, SQS, EventBridge, SES, and Lambda.
+### Prerequisites
 
-#### Steps
+- **Java 11+**
+- **AWS Account** with permissions for SNS, SQS, SES, EventBridge, and Lambda
+- **Spring Boot** installed locally#### Steps
 
 ##### Clone the repository:
 
